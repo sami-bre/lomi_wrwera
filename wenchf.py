@@ -24,7 +24,7 @@ aim = AimSprite(initial_position=(448, 320))
 
 # Set up the bird sprites
 birdList = []
-for _ in range(3):
+for _ in range(10):
     bird = BirdSprite(initial_position=(random.randint(*fly_dimensions[0]), random.randint(*fly_dimensions[1])))
     birdList.append(bird)
 birdSprites = Group(birdList)
@@ -67,7 +67,7 @@ def calculate_velocity(speed, angle):
     return velocity_x, velocity_y
 
 shots = 0
-gameplay_time = 10000  # the amount of time (in milliseconds) the game lasts for
+gameplay_time = 30000  # the amount of time (in milliseconds) the game lasts for
 
 # Set up the fonts
 time_font = pygame.font.Font(None, 32) # creating the font
