@@ -1,2 +1,2 @@
-# lomi_wrwera
-A classic Ethiopian tradition, "moli wrwera during timket" created as a game
+# Wenchf
+A classic Ethiopian traditional game: throwing "wenchf" to hit birds.
