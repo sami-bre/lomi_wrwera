@@ -13,7 +13,7 @@ width, height = 896, 640
 fly_width, fly_height = 600, 600
 fly_dimensions = ((250, 850), (0, 600))
 window = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Slingshot Projectile")
+pygame.display.set_caption("Wenchf")
 
 # Define colors
 BLACK = (0, 0, 0)
