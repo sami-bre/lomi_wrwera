@@ -1,4 +1,5 @@
 import random
+import sys
 from time import sleep
 from pygame.sprite import Group
 import math
@@ -65,12 +66,17 @@ def calculate_velocity(speed, angle):
     velocity_y = -speed * math.sin(math.radians(angle))
     return velocity_x, velocity_y
 
-# Set up the font
-font = pygame.font.Font(None, 48)
+shots = 0
+gameplay_time = 60000  # the amount of time (in milliseconds) the game lasts for
+
+# Set up the fonts
+result_font = pygame.font.Font(None, 48)
+time_font = pygame.font.Font(None, 32) # creating the font
+
 
 
 def display_message(message):
-    game_over_text = font.render(message, True, (0, 0, 0))
+    game_over_text = result_font.render(message, True, (0, 0, 0))
     text_rect = game_over_text.get_rect(center=(width // 2, height // 2))
     window.blit(game_over_text, text_rect)
 
@@ -79,7 +85,7 @@ running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            sys.exit();
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:  # Left mouse button down
                 mouse_down = True
@@ -92,6 +98,7 @@ while running:
                     projectile_speed_x = velocity_x
                     projectile_speed_y = velocity_y
                     projectile_released = True
+                    shots += 1
 
     # This is when the mouse is down but not released yet
     # Update projectile position and velocity
@@ -116,6 +123,7 @@ while running:
         # Reset the position
         setup_projectile_initial_position()
 
+    gameplay_time -= 1
 
     # Let's check if there is a collision between the stone and the birds
     collision = pygame.sprite.spritecollide(stone, birdSprites, True)
@@ -141,6 +149,14 @@ while running:
 
     # Draw the birds
     birdSprites.draw(window)
+
+    # Draw the time text onto the window
+    time_text_surface = time_font.render(f"Seconds left: {(gameplay_time - pygame.time.get_ticks())//1000}", True, BLACK)    # creating the surface
+    window.blit(time_text_surface, (10, 10))
+
+    # Draw the shots text onto the window
+    shots_text_surface = time_font.render(f"Shots: {shots}", True, BLACK)    # creating the surface
+    window.blit(shots_text_surface, (10, 40))
 
     # Display game over message if game over
     if not running:
