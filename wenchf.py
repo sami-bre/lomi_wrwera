@@ -67,18 +67,14 @@ def calculate_velocity(speed, angle):
     return velocity_x, velocity_y
 
 shots = 0
-gameplay_time = 60000  # the amount of time (in milliseconds) the game lasts for
+gameplay_time = 10000  # the amount of time (in milliseconds) the game lasts for
 
 # Set up the fonts
-result_font = pygame.font.Font(None, 48)
 time_font = pygame.font.Font(None, 32) # creating the font
+time_font = pygame.font.Font(None, 32) # creating the font
+result_font = pygame.font.Font(None, 48)
 
 
-
-def display_message(message):
-    game_over_text = result_font.render(message, True, (0, 0, 0))
-    text_rect = game_over_text.get_rect(center=(width // 2, height // 2))
-    window.blit(game_over_text, text_rect)
 
 # Game loop
 running = True
@@ -158,9 +154,16 @@ while running:
     shots_text_surface = time_font.render(f"Shots: {shots}", True, BLACK)    # creating the surface
     window.blit(shots_text_surface, (10, 40))
 
-    # Display game over message if game over
-    if not running:
-        display_message("You're done. You took {} shots.".format(5))
+
+    if(pygame.time.get_ticks() > gameplay_time and len(birdSprites) > 0):
+        running = False
+        game_over_surface = result_font.render("Time's up!", True, BLACK)
+        window.blit(game_over_surface, (width//2 - 80, height//2 - 20))
+
+    if(len(birdSprites) == 0):
+        running = False
+        win_message_surface = result_font.render(f"You won! with {shots} shots", True, BLACK)
+        window.blit(win_message_surface, (width//2 - 160, height//2 - 20))
 
     pygame.display.flip()
 
