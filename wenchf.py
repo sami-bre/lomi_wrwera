@@ -16,10 +16,10 @@ window = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Wenchf")
 
 # sound set up
-environment_sound = pygame.mixer.Sound("mixkit-birds-in-forest-loop-1239 (8).wav")
+environment_sound = pygame.mixer.Sound("environment_sound.wav")
 environment_sound.play()
 
-collision_sound = pygame.mixer.Sound("mixkit-bird-screeching-in-the-jungle-2436.wav")
+collision_sound = pygame.mixer.Sound("collision_sound.wav")
 
 # Define colors
 BLACK = (0, 0, 0)
