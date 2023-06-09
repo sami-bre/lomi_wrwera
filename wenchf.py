@@ -20,6 +20,7 @@ environment_sound = pygame.mixer.Sound("environment_sound.wav")
 environment_sound.play()
 
 collision_sound = pygame.mixer.Sound("collision_sound.wav")
+stone_throwing_sound = pygame.mixer.Sound("stone_throwing_sound.mp3")
 
 # Define colors
 BLACK = (0, 0, 0)
@@ -102,6 +103,7 @@ while running:
                     projectile_speed_y = velocity_y
                     projectile_released = True
                     shots += 1
+                    stone_throwing_sound.play()
 
     # This is when the mouse is down but not released yet
     # Update projectile position and velocity
