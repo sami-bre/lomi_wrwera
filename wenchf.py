@@ -15,6 +15,12 @@ fly_dimensions = ((250, 850), (0, 600))
 window = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Wenchf")
 
+# sound set up
+environment_sound = pygame.mixer.Sound("mixkit-birds-in-forest-loop-1239 (8).wav")
+environment_sound.play()
+
+collision_sound = pygame.mixer.Sound("mixkit-bird-screeching-in-the-jungle-2436.wav")
+
 # Define colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -67,6 +73,7 @@ def calculate_velocity(speed, angle):
     return velocity_x, velocity_y
 
 shots = 0
+score = 0
 gameplay_time = 30000  # the amount of time (in milliseconds) the game lasts for
 
 # Set up the fonts
@@ -123,7 +130,13 @@ while running:
 
     # Let's check if there is a collision between the stone and the birds
     collision = pygame.sprite.spritecollide(stone, birdSprites, True)
+            
+    # Add one to the score for each collision
+    for collide in collision:
+        score += 1
+        
     if collision:
+        collision_sound.play()
         # check if there are birds left
         if len(birdSprites) == 0:
             running = False
@@ -153,11 +166,14 @@ while running:
     # Draw the shots text onto the window
     shots_text_surface = time_font.render(f"Shots: {shots}", True, BLACK)    # creating the surface
     window.blit(shots_text_surface, (10, 40))
-
+    
+    # Draw the score text onto the window
+    score_text_surface = time_font.render(f"Score: {score}", True, BLACK)    # creating the surface
+    window.blit(score_text_surface, (10, 70))
 
     if(pygame.time.get_ticks() > gameplay_time and len(birdSprites) > 0):
         running = False
-        game_over_surface = result_font.render("Time's up!", True, BLACK)
+        game_over_surface = result_font.render(f"Time's up! with score: {score}/10", True, BLACK)        
         window.blit(game_over_surface, (width//2 - 80, height//2 - 20))
 
     if(len(birdSprites) == 0):
