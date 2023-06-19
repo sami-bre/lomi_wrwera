@@ -85,7 +85,7 @@ time_font = pygame.font.Font(None, 32) # creating the font
 result_font = pygame.font.Font(None, 48)
 
 # Load and resize the background image
-background_image = pygame.image.load("bckg4.png")
+background_image = pygame.image.load("bcg5.png")
 background_image = pygame.transform.scale(background_image, (width, height))
 
 FONT_TITLE = pygame.font.SysFont("Arial", 40)
