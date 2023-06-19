@@ -21,7 +21,7 @@ pygame.display.set_caption("Wenchf")
 environment_sound = pygame.mixer.Sound("environment_sound.wav")
 environment_sound.play()
 
-collision_sound = pygame.mixer.Sound("collision_sound.wav")
+collision_sound = pygame.mixer.Sound("collision_sound1.wav")
 stone_throwing_sound = pygame.mixer.Sound("stone_throwing_sound.mp3")
 
 # Define colors
@@ -43,8 +43,8 @@ stone = StoneSprite(initial_position=(100, height // 2))
 
 # Set up the projectile
 projectile_radius = 5
-stone.rect.x = 100
-stone.rect.y = height // 2
+stone.rect.x = 80
+stone.rect.y = height // 2-80
 pre_release_projectile_speed = 0
 projectile_angle = 45
 
@@ -93,6 +93,19 @@ FONT_OPTIONS = pygame.font.SysFont("Arial", 20)
 
 
 
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
+# Define the font
+font_title = pygame.font.SysFont(None, 48)
+font_options = pygame.font.SysFont(None, 32)
+
+
+
+
+
+
+
 def start_game():
     global stone
     width, height = 896, 640
@@ -105,7 +118,7 @@ def start_game():
     environment_sound = pygame.mixer.Sound("environment_sound.wav")
     environment_sound.play()
 
-    collision_sound = pygame.mixer.Sound("collision_sound.wav")
+    collision_sound = pygame.mixer.Sound("collision_sound1.wav")
     stone_throwing_sound = pygame.mixer.Sound("stone_throwing_sound.mp3")
 
     # Define colors
@@ -134,8 +147,8 @@ def start_game():
         global stone
         global pre_release_projectile_speed
         global projectile_angle
-        stone.rect.x = 100
-        stone.rect.y = height // 2
+        stone.rect.x = 80
+        stone.rect.y = height // 2 -80
         pre_release_projectile_speed = 0
         projectile_angle = 45
 
@@ -167,7 +180,7 @@ def start_game():
     result_font = pygame.font.Font(None, 48)
 
     # Load and resize the background image
-    background_image = pygame.image.load("bckg4.png")
+    background_image = pygame.image.load("bcg5.png")
     background_image = pygame.transform.scale(background_image, (width, height))
 
     FONT_TITLE = pygame.font.SysFont("Arial", 40)
@@ -268,11 +281,14 @@ def start_game():
             running = False
             game_over_surface = result_font.render(f"Time's up! with score: {score}/10", True, BLACK)
             window.blit(game_over_surface, (width // 2 - 80, height // 2 - 20))
+            # show_menu()
 
         if len(birdSprites) == 0:
             running = False
             win_message_surface = result_font.render(f"You won! with {shots} shots", True, BLACK)
             window.blit(win_message_surface, (width // 2 - 160, height // 2 - 20))
+                              
+            # show_menu()
 
         pygame.display.flip()
 
@@ -286,10 +302,10 @@ def start_game():
 
 
 def show_menu():
-    menu_title = FONT_TITLE.render("Game Menu", True, WHITE)
-    option_start = FONT_OPTIONS.render("Start Game", True, WHITE)
-    option_instructions = FONT_OPTIONS.render("Instructions", True, WHITE)
-    option_exit = FONT_OPTIONS.render("Exit", True, WHITE)
+    menu_title = FONT_TITLE.render("wenchf wrwera", True, WHITE)
+    option_start = FONT_OPTIONS.render("1 Start Game", True, WHITE)
+   
+    option_exit = FONT_OPTIONS.render("2 Exit", True, WHITE)
 
     menu_running = True
     while menu_running:
@@ -304,10 +320,6 @@ def show_menu():
                     # Call your game function to start the game
                     start_game()
                 elif event.key == K_2:
-                    # Instructions option selected
-                    # Implement instructions screen or display instructions here
-                    print("Instructions")
-                elif event.key == K_3:
                     # Exit option selected
                     pygame.quit()
                     quit()
@@ -315,7 +327,7 @@ def show_menu():
         window.fill(BLACK)
         window.blit(menu_title, (width // 2 - menu_title.get_width() // 2, 100))
         window.blit(option_start, (width // 2 - option_start.get_width() // 2, 250))
-        window.blit(option_instructions, (width // 2 - option_instructions.get_width() // 2, 300))
+       
         window.blit(option_exit, (width // 2 - option_exit.get_width() // 2, 350))
 
         pygame.display.flip()
